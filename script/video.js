@@ -4,6 +4,13 @@ const data = await res.json();
 displayCategories(data.categories)
 }
 
+
+const loadVideos = async() =>{
+const res = await fetch('https://openapi.programming-hero.com/api/phero-tube/videos');
+const data = await res.json();
+displayVideos(data.videos)
+}
+
 const displayCategories = (data) =>{
     data.map(item =>{
         const categoriesContainer = document.getElementById('category-container');
@@ -16,4 +23,9 @@ const displayCategories = (data) =>{
     })
 }
 
+const displayVideos = (videos) => {
+    console.log(videos)
+}
+
 loadCategories();
+loadVideos();
