@@ -1,3 +1,12 @@
+// convert time
+function getTimeString (time){
+    const hours = parseInt(time / 3600);
+    let remainingSecond = time % 3600;
+    const minute = parseInt(remainingSecond / 60 );
+    return `${hours} hours ${minute} minutes ago`
+}
+
+
 const loadCategories = async () => {
     const res = await fetch('https://openapi.programming-hero.com/api/phero-tube/categories');
     const data = await res.json();
@@ -35,7 +44,7 @@ const displayVideos = (videos) => {
         <img class="w-full h-full object-cover rounded-t-xl"
         src=${video.thumbnail}
         alt=${video.title} />
-        <span>${video.others.posted_date == ""? "" : `<span class="absolute right-3 bottom-3 bg-black p-1 text-white rounded">${video.others.posted_date}</span>`}</span>
+        <span>${video.others.posted_date == ""? "" : `<span class="absolute right-3 bottom-3 bg-black p-1 text-white rounded">${getTimeString(video.others.posted_date)}</span>`}</span>
         </figure>
         <div class="flex gap-4">
            
