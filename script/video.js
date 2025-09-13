@@ -25,22 +25,27 @@ const displayCategories = (data) => {
 
 const displayVideos = (videos) => {
     const videoContainer = document.getElementById('videos');
-
+    console.log(videos);
     videos.map(video => {
         const card = document.createElement('div');
-        card.classList = 'card bg-base-100';
+        card.classList = 'card w-96 bg-base-100';
         card.innerHTML = `
         
         <figure>
-        <img
-        src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-        alt="Shoes" />
+        <img class="w-[400px] h-[200px]"
+        src=${video.thumbnail}
+        alt=${video.title} />
         </figure>
-        <div class="card-body">
-            <h2 class="card-title">Card Title</h2>
-            <p>A card component has a figure, a body part, and inside body there are title and actions parts</p>
-            <div class="card-actions justify-end">
-            <button class="btn btn-primary">Buy Now</button>
+        <div class="flex gap-4">
+           
+            <img class="w-10 h-10 rounded-full mt-5" src=${video.authors[0].profile_picture} alt="" />
+           
+            <div class="space-y-2 my-4">
+                <h2 class="card-title">${video.title}</h2>
+                <p class="flex items-center gap-3"><span>${video.authors[0].profile_name}</span> <span>${video.authors[0].verified ? `<img src=${'https://i.ibb.co/7JL7yWG1/verified.png'}>` : ''}</span></p>
+                <p>${video.others.views} views</p>
+            
+        </div>
         </div>
         </div>
 
