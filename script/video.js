@@ -28,7 +28,7 @@ const displayVideos = (videos) => {
     console.log(videos);
     videos.map(video => {
         const card = document.createElement('div');
-        card.classList = 'card w-96 bg-base-100';
+        card.classList = 'card bg-base-100';
         card.innerHTML = `
         
         <figure>
