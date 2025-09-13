@@ -31,10 +31,11 @@ const displayVideos = (videos) => {
         card.classList = 'card bg-base-100';
         card.innerHTML = `
         
-        <figure>
-        <img class="w-[400px] h-[200px]"
+        <figure class="h-[200px] relative">
+        <img class="w-full h-full object-cover rounded-t-xl"
         src=${video.thumbnail}
         alt=${video.title} />
+        <span>${video.others.posted_date == ""? "" : `<span class="absolute right-3 bottom-3 bg-black p-1 text-white rounded">${video.others.posted_date}</span>`}</span>
         </figure>
         <div class="flex gap-4">
            
