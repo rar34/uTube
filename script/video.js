@@ -1,8 +1,8 @@
 // convert time
-function getTimeString (time){
+function getTimeString(time) {
     const hours = parseInt(time / 3600);
     let remainingSecond = time % 3600;
-    const minute = parseInt(remainingSecond / 60 );
+    const minute = parseInt(remainingSecond / 60);
     return `${hours} hours ${minute} minutes ago`
 }
 
@@ -13,6 +13,11 @@ const loadCategories = async () => {
     displayCategories(data.categories)
 }
 
+const getVideoByCategory = (id) =>{
+    fetch(`https://openapi.programming-hero.com/api/phero-tube/category/${id}`)
+    .then(res => res.json())
+    .then(data =>displayVideos(data.category))
+}
 
 const loadVideos = async () => {
     const res = await fetch('https://openapi.programming-hero.com/api/phero-tube/videos');
@@ -27,14 +32,26 @@ const displayCategories = (data) => {
         const button = document.createElement('button');
         button.classList = 'btn';
         button.innerText = item.category;
-
+        button.onclick = ()=>{
+            getVideoByCategory(item.category_id)
+        }
         categoriesContainer.append(button)
     })
 }
 
 const displayVideos = (videos) => {
     const videoContainer = document.getElementById('videos');
-    console.log(videos);
+    videoContainer.innerHTML=""
+
+    if(videos.length == 0){
+        videoContainer.innerHTML = `
+        <div class="flex justify-center items-center">
+            <p class="text-center">Video not found</p>
+        </div>
+        `;
+        return;
+    }
+    // console.log(videos);
     videos.map(video => {
         const card = document.createElement('div');
         card.classList = 'card bg-base-100';
@@ -44,7 +61,7 @@ const displayVideos = (videos) => {
         <img class="w-full h-full object-cover rounded-t-xl"
         src=${video.thumbnail}
         alt=${video.title} />
-        <span>${video.others.posted_date == ""? "" : `<span class="absolute right-3 bottom-3 bg-black p-1 text-white rounded">${getTimeString(video.others.posted_date)}</span>`}</span>
+        <span>${video.others.posted_date == "" ? "" : `<span class="absolute right-3 bottom-3 bg-black p-1 text-xs text-white rounded">${getTimeString(video.others.posted_date)}</span>`}</span>
         </figure>
         <div class="flex gap-4">
            
