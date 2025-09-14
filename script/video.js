@@ -45,8 +45,11 @@ const displayVideos = (videos) => {
 
     if(videos.length == 0){
         videoContainer.innerHTML = `
-        <div class="flex justify-center items-center">
-            <p class="text-center">Video not found</p>
+        <div class="col-span-full mt-4 md:mt-14 text-center">
+            <div class="flex flex-col items-center justify-center">
+                <img class="w-[150px] mb-6" src="../assets/Icon.png" />
+                <p class="text-center text-2xl font-bold">Oops!! Sorry, There is no content here.</p>
+            </div>
         </div>
         `;
         return;
