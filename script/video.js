@@ -1,3 +1,10 @@
+function removeActiveButton(){
+    const activeBtns = document.getElementsByClassName('active');
+    for(let activeBtn of activeBtns){
+        activeBtn.classList.remove('active');
+    }
+}
+
 // convert time
 function getTimeString(time) {
     const hours = parseInt(time / 3600);
@@ -17,6 +24,7 @@ const getVideoByCategory = (id) =>{
     fetch(`https://openapi.programming-hero.com/api/phero-tube/category/${id}`)
     .then(res => res.json())
     .then(data =>{
+        removeActiveButton();
         const clickedButton = document.getElementById(`btn-${id}`)
         clickedButton.classList.add("active");
         displayVideos(data.category)
