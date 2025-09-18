@@ -29,15 +29,15 @@ const displayCategories = (data) => {
     data.map(item => {
         const categoriesContainer = document.getElementById('category-container');
 
-        const button = document.createElement('button');
-        button.classList = 'btn';
-        button.innerText = item.category;
-        button.onclick = ()=>{
-            getVideoByCategory(item.category_id)
-        }
-        categoriesContainer.append(button)
+        const categoryDiv = document.createElement('div');
+        categoryDiv.innerHTML = `
+            <button class="btn" onclick="getVideoByCategory(${item.category_id})">${item.category}</button>
+        `;
+        categoriesContainer.append(categoryDiv)
     })
 }
+
+
 
 const displayVideos = (videos) => {
     const videoContainer = document.getElementById('videos');
