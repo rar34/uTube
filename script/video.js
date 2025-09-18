@@ -31,7 +31,7 @@ const displayCategories = (data) => {
 
         const categoryDiv = document.createElement('div');
         categoryDiv.innerHTML = `
-            <button class="btn" onclick="getVideoByCategory(${item.category_id})">${item.category}</button>
+            <button id="btn-${item.category_id}" class="btn hover:bg-red-500 hover:text-white" onclick="getVideoByCategory(${item.category_id})">${item.category}</button>
         `;
         categoriesContainer.append(categoryDiv)
     })
