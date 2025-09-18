@@ -1,6 +1,6 @@
-function removeActiveButton(){
+function removeActiveButton() {
     const activeBtns = document.getElementsByClassName('active');
-    for(let activeBtn of activeBtns){
+    for (let activeBtn of activeBtns) {
         activeBtn.classList.remove('active');
     }
 }
@@ -20,21 +20,25 @@ const loadCategories = async () => {
     displayCategories(data.categories)
 }
 
-const getVideoByCategory = (id) =>{
+const getVideoByCategory = (id) => {
     fetch(`https://openapi.programming-hero.com/api/phero-tube/category/${id}`)
-    .then(res => res.json())
-    .then(data =>{
-        removeActiveButton();
-        const clickedButton = document.getElementById(`btn-${id}`)
-        clickedButton.classList.add("active");
-        displayVideos(data.category)
-    })
+        .then(res => res.json())
+        .then(data => {
+            removeActiveButton();
+            const clickedButton = document.getElementById(`btn-${id}`)
+            clickedButton.classList.add("active");
+            displayVideos(data.category)
+        })
 }
 
-const loadVideos = async () => {
-    const res = await fetch('https://openapi.programming-hero.com/api/phero-tube/videos');
-    const data = await res.json();
-    displayVideos(data.videos)
+function loadVideos() {
+    fetch('https://openapi.programming-hero.com/api/phero-tube/videos')
+        .then(res => res.json())
+        .then(data => {
+            removeActiveButton();
+            document.getElementById('btn-all').classList.add('active')
+            displayVideos(data.videos)
+        })
 }
 
 const displayCategories = (data) => {
@@ -53,9 +57,9 @@ const displayCategories = (data) => {
 
 const displayVideos = (videos) => {
     const videoContainer = document.getElementById('videos');
-    videoContainer.innerHTML=""
+    videoContainer.innerHTML = ""
 
-    if(videos.length == 0){
+    if (videos.length == 0) {
         videoContainer.innerHTML = `
         <div class="col-span-full mt-4 md:mt-14 text-center">
             <div class="flex flex-col items-center justify-center">
